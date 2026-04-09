@@ -39,17 +39,14 @@ const recentGames = [
   { 
     id: 1, 
     image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-zU3IxIW8yBvRZGrfEwmvILEwMViai4.png",
-    provider: "PGSOFT"
   },
   { 
     id: 2, 
     image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-ApvLUS5bC7AFw7tyO7LPAaROm3zDsX.png",
-    provider: "PRAGMATIC"
   },
   { 
     id: 3, 
     image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-ZGzocdNuCda173j0LkTcVpdNNUMMVn.png",
-    provider: "PGSOFT"
   },
 ]
 
@@ -103,7 +100,7 @@ export function HomeContent() {
         </div>
       </div>
 
-      {/* Main Promo Banner */}
+      {/* Main Promo Banner - removed one scroll indicator */}
       <div className="px-4 mb-4">
         <div className="relative rounded-2xl overflow-hidden">
           <Image
@@ -114,7 +111,7 @@ export function HomeContent() {
             className="w-full h-auto object-cover"
             unoptimized
           />
-          {/* Carousel dots */}
+          {/* Single carousel dots indicator */}
           <div className="absolute bottom-3 left-4 flex gap-1.5">
             <div className="w-6 h-1.5 bg-white rounded-full" />
             <div className="w-1.5 h-1.5 bg-white/40 rounded-full" />
@@ -160,7 +157,7 @@ export function HomeContent() {
         </div>
       </div>
 
-      {/* Game History Section */}
+      {/* Game History Section - removed provider labels */}
       <div className="px-4 mb-6">
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-2">
@@ -181,7 +178,7 @@ export function HomeContent() {
           {recentGames.map((game) => (
             <button
               key={game.id}
-              className="flex-shrink-0 relative"
+              className="flex-shrink-0"
             >
               <Image
                 src={game.image}
@@ -191,9 +188,6 @@ export function HomeContent() {
                 className="w-[120px] h-[160px] rounded-xl object-cover"
                 unoptimized
               />
-              <div className="absolute bottom-2 left-2 right-2 bg-black/60 rounded px-1.5 py-0.5">
-                <span className="text-[10px] text-white font-medium">{game.provider}</span>
-              </div>
             </button>
           ))}
         </div>

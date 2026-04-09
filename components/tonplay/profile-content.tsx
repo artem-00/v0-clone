@@ -10,10 +10,13 @@ interface ProfileContentProps {
 export function ProfileContent({ onBack }: ProfileContentProps) {
   return (
     <div className="pb-24 bg-[#0d0e1a]">
+      {/* Black bar for Telegram padding */}
+      <div className="h-6 bg-[#0d0e1a]" />
+
       {/* Back Button Row */}
       <div className="flex items-center justify-between px-4 py-3">
         <button onClick={onBack} className="bg-[#1f2937] px-4 py-2 rounded-full flex items-center gap-2">
-          <ChevronLeft />
+          <ChevronLeftIcon />
           <span className="text-white text-sm">Назад</span>
         </button>
         <div className="flex items-center gap-2">
@@ -26,28 +29,34 @@ export function ProfileContent({ onBack }: ProfileContentProps) {
         </div>
       </div>
 
-      {/* App Header Row */}
+      {/* App Header Row - with cleaner logo and avatar without online indicator */}
       <div className="flex items-center justify-between px-4 py-2 mb-2">
         <div className="flex items-center flex-shrink-0">
-          <svg viewBox="0 0 60 32" className="h-8 w-14">
-            <text x="0" y="14" fill="white" fontFamily="serif" fontStyle="italic" fontSize="14" fontWeight="bold">Ton</text>
-            <text x="0" y="28" fill="white" fontFamily="serif" fontStyle="italic" fontSize="14" fontWeight="normal">play</text>
-          </svg>
+          <Image
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-qTQXzAnIDMAzoBNUlFCSwmkQbSc1S5.png"
+            alt="TonPlay"
+            width={56}
+            height={32}
+            className="h-8 w-14 object-contain"
+            unoptimized
+          />
         </div>
-        <div className="flex flex-col items-start ml-2">
-          <div className="flex items-center gap-0.5">
-            <span className="text-white text-sm font-medium">USD</span>
-            <ChevronDown className="w-3.5 h-3.5 text-[#6b7280]" />
+        <div className="flex items-center gap-2 ml-auto mr-2">
+          <div className="flex flex-col items-center">
+            <div className="flex items-center gap-0.5">
+              <span className="text-white text-sm font-medium">USD</span>
+              <ChevronDown className="w-3.5 h-3.5 text-[#6b7280]" />
+            </div>
+            <span className="text-white text-sm">0,00$</span>
           </div>
-          <span className="text-white text-sm">0,00$</span>
+          <button className="bg-[#3b82f6] text-white px-5 py-2.5 rounded-lg text-[15px] font-semibold">
+            Пополнить
+          </button>
         </div>
-        <button className="bg-[#3b82f6] text-white px-6 py-2.5 rounded-xl text-[15px] font-semibold ml-auto mr-3">
-          Пополнить
-        </button>
-        <div className="relative flex-shrink-0">
+        <div className="flex-shrink-0 ml-2">
           <div className="w-11 h-11 rounded-xl overflow-hidden">
             <Image 
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-2WnR2w2wFXA1rxJlamwLMwXUxKH2UY.png"
+              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-A7EEptKyFtHLvY81Wiao0eygmTUdWg.png"
               alt="Avatar"
               width={44}
               height={44}
@@ -55,7 +64,6 @@ export function ProfileContent({ onBack }: ProfileContentProps) {
               unoptimized
             />
           </div>
-          <div className="absolute -top-0.5 -right-0.5 w-3.5 h-3.5 bg-[#ef4444] rounded-full border-2 border-[#0d0e1a]" />
         </div>
       </div>
 
@@ -67,12 +75,12 @@ export function ProfileContent({ onBack }: ProfileContentProps) {
         <h1 className="text-white text-xl font-bold">Личный профиль</h1>
       </div>
 
-      {/* Copy ID Section */}
+      {/* Copy ID Section - without online indicator */}
       <div className="px-4 mb-6">
         <div className="bg-[#1f2937] rounded-2xl p-4 flex items-center gap-3">
           <div className="w-12 h-12 rounded-xl overflow-hidden">
             <Image 
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-2WnR2w2wFXA1rxJlamwLMwXUxKH2UY.png"
+              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-A7EEptKyFtHLvY81Wiao0eygmTUdWg.png"
               alt="Avatar"
               width={48}
               height={48}
@@ -172,10 +180,14 @@ export function ProfileContent({ onBack }: ProfileContentProps) {
       {/* Footer */}
       <div className="px-4">
         <div className="flex items-center justify-between mb-6">
-          <svg viewBox="0 0 80 32" className="h-8 w-20">
-            <text x="0" y="14" fill="white" fontFamily="serif" fontStyle="italic" fontSize="14" fontWeight="bold">Ton</text>
-            <text x="0" y="28" fill="white" fontFamily="serif" fontStyle="italic" fontSize="14" fontWeight="normal">play</text>
-          </svg>
+          <Image
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-qTQXzAnIDMAzoBNUlFCSwmkQbSc1S5.png"
+            alt="TonPlay"
+            width={80}
+            height={32}
+            className="h-8 w-20 object-contain"
+            unoptimized
+          />
           <button className="flex items-center gap-2 bg-[#1f2937] px-4 py-2.5 rounded-xl">
             <span className="text-base">🇷🇺</span>
             <span className="text-white text-[14px]">Русский</span>
@@ -221,7 +233,7 @@ export function ProfileContent({ onBack }: ProfileContentProps) {
   )
 }
 
-function ChevronLeft() {
+function ChevronLeftIcon() {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 text-white">
       <path d="M15 18l-6-6 6-6" />
