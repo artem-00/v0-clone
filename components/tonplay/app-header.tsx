@@ -12,7 +12,14 @@ export function AppHeader({ onOpenWallet, onOpenProfile }: AppHeaderProps) {
   return (
     <>
       {/* Black bar for Telegram padding */}
-      <div className="h-6 bg-[#0d0e1a]" />
+      <Image
+        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-f8RGakPyGb5iH90tmHQQKOSqPBEHyI.png"
+        alt=""
+        width={400}
+        height={24}
+        className="w-full h-6 object-cover"
+        unoptimized
+      />
       
       <header className="flex items-center justify-between px-4 py-3 bg-[#0d0e1a]">
         {/* Logo - TonPlay using provided image */}
