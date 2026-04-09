@@ -1,43 +1,70 @@
 "use client"
 
 import { useState } from "react"
-import { ChevronLeft, ChevronRight, Headphones } from "lucide-react"
+import { ChevronLeft, ChevronRight, Headphones, Search, Clock } from "lucide-react"
 import { cn } from "@/lib/utils"
+import Image from "next/image"
 
 const bonusCards = [
   { 
     id: 1, 
     image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-9CTQND0fnJWJwdgt2gpuEvasnaZT3R.png",
-    badge: 1
+    label: "Мои бонусы",
   },
   { 
     id: 2, 
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-6h9L2pN5dFreZKTaQuiw0y5j2tfxve.png"
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-6h9L2pN5dFreZKTaQuiw0y5j2tfxve.png",
+    label: "Кешбэк",
+    badge: "до 6%",
   },
   { 
     id: 3, 
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-WvtgtizRfqSfamgzyHRgLM8KMLTYh4.png"
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-WvtgtizRfqSfamgzyHRgLM8KMLTYh4.png",
+    label: "VIP",
+  },
+  { 
+    id: 4, 
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-9CTQND0fnJWJwdgt2gpuEvasnaZT3R.png",
+    label: "Крипт...",
   },
 ]
 
 const gameCategories = [
-  { id: "all", label: "Все игры" },
-  { id: "slots", label: "Слоты" },
-  { id: "live", label: "Live-игры" },
+  { id: "all", label: "Все игры", icon: "grid" },
+  { id: "slots", label: "Слоты", icon: "slots" },
+  { id: "live", label: "Live-игры", icon: "live" },
 ]
 
 const recentGames = [
   { 
     id: 1, 
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-zU3IxIW8yBvRZGrfEwmvILEwMViai4.png"
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-zU3IxIW8yBvRZGrfEwmvILEwMViai4.png",
+    provider: "PGSOFT"
   },
   { 
     id: 2, 
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-ApvLUS5bC7AFw7tyO7LPAaROm3zDsX.png"
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-ApvLUS5bC7AFw7tyO7LPAaROm3zDsX.png",
+    provider: "PRAGMATIC"
   },
   { 
     id: 3, 
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-ZGzocdNuCda173j0LkTcVpdNNUMMVn.png"
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-ZGzocdNuCda173j0LkTcVpdNNUMMVn.png",
+    provider: "PGSOFT"
+  },
+]
+
+const liveGames = [
+  { 
+    id: 1, 
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-zU3IxIW8yBvRZGrfEwmvILEwMViai4.png",
+  },
+  { 
+    id: 2, 
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-ApvLUS5bC7AFw7tyO7LPAaROm3zDsX.png",
+  },
+  { 
+    id: 3, 
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-ZGzocdNuCda173j0LkTcVpdNNUMMVn.png",
   },
 ]
 
@@ -46,111 +73,166 @@ export function HomeContent() {
 
   return (
     <div className="pb-24">
-      {/* Bonus Cards Row */}
+      {/* Bonus Cards Row with Labels */}
       <div className="px-4 py-3">
         <div className="flex gap-2 overflow-x-auto scrollbar-hide">
           {bonusCards.map((card) => (
-            <button
+            <div
               key={card.id}
-              className="flex-shrink-0 relative"
+              className="flex-shrink-0 flex flex-col items-center"
             >
-              <img
-                src={card.image}
-                alt=""
-                className="w-[110px] h-[64px] rounded-lg object-cover"
-              />
-              {card.badge && (
-                <span className="absolute top-1 left-1 bg-[#a855f7] text-white text-[10px] font-bold rounded-full min-w-[18px] h-[18px] flex items-center justify-center px-1">
-                  {card.badge}
-                </span>
-              )}
-            </button>
+              <button className="relative mb-2">
+                <Image
+                  src={card.image}
+                  alt={card.label}
+                  width={110}
+                  height={72}
+                  className="w-[110px] h-[72px] rounded-2xl object-cover"
+                  unoptimized
+                />
+                {card.badge && (
+                  <span className="absolute top-2 right-2 bg-[#f97316] text-white text-[10px] font-bold rounded-full px-2 py-0.5 flex items-center gap-0.5">
+                    <span className="w-2 h-2 bg-white rounded-full inline-block" />
+                    {card.badge}
+                  </span>
+                )}
+              </button>
+              <span className="text-white text-xs font-medium text-center">{card.label}</span>
+            </div>
           ))}
         </div>
       </div>
 
       {/* Main Promo Banner */}
       <div className="px-4 mb-4">
-        <div className="relative rounded-xl overflow-hidden">
-          <img
+        <div className="relative rounded-2xl overflow-hidden">
+          <Image
             src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-yVfEnCdP6NBoobex0LhMwKG1o1MhMm.png"
             alt="375% +200FS FOR NEW PLAYERS"
+            width={400}
+            height={200}
             className="w-full h-auto object-cover"
+            unoptimized
           />
           {/* Carousel dots */}
           <div className="absolute bottom-3 left-4 flex gap-1.5">
-            <div className="w-5 h-1.5 bg-white rounded-full" />
+            <div className="w-6 h-1.5 bg-white rounded-full" />
             <div className="w-1.5 h-1.5 bg-white/40 rounded-full" />
             <div className="w-1.5 h-1.5 bg-white/40 rounded-full" />
           </div>
         </div>
       </div>
 
-      {/* Category Tabs */}
+      {/* Category Tabs with Search */}
       <div className="px-4 mb-4">
-        <div className="flex items-center gap-2">
-          {/* Category Buttons */}
-          {gameCategories.map((cat) => {
-            const isActive = activeCategory === cat.id
-            return (
-              <button
-                key={cat.id}
-                onClick={() => setActiveCategory(cat.id)}
-                className={cn(
-                  "flex items-center gap-2 px-4 py-2 transition-all",
-                  isActive ? "border-b-2 border-[#3b82f6]" : ""
-                )}
-              >
-                <span className={cn(
-                  "text-[15px] font-medium whitespace-nowrap",
-                  isActive ? "text-white" : "text-[#6b7280]"
-                )}>
-                  {cat.label}
-                </span>
-              </button>
-            )
-          })}
+        <div className="flex items-center gap-1">
+          {/* Search Button */}
+          <button className="w-11 h-11 rounded-xl bg-[#1f2937] flex items-center justify-center flex-shrink-0">
+            <Search className="w-5 h-5 text-white" strokeWidth={2} />
+          </button>
           
-          {/* Right side controls */}
-          <div className="ml-auto flex items-center gap-2">
-            <button className="bg-[#3b82f6] text-white text-sm font-medium px-4 py-1.5 rounded-lg">
-              Все
-            </button>
-            <button className="w-8 h-8 rounded-lg bg-[#1f2937] flex items-center justify-center">
+          {/* Category Buttons */}
+          <div className="flex items-center overflow-x-auto scrollbar-hide">
+            {gameCategories.map((cat) => {
+              const isActive = activeCategory === cat.id
+              return (
+                <button
+                  key={cat.id}
+                  onClick={() => setActiveCategory(cat.id)}
+                  className={cn(
+                    "flex items-center gap-2 px-4 py-2.5 transition-all whitespace-nowrap",
+                    isActive ? "border-b-2 border-[#3b82f6]" : ""
+                  )}
+                >
+                  {cat.icon === "grid" && <GridIcon className={isActive ? "text-[#3b82f6]" : "text-[#6b7280]"} />}
+                  {cat.icon === "slots" && <SlotsIcon className={isActive ? "text-[#3b82f6]" : "text-[#6b7280]"} />}
+                  {cat.icon === "live" && <LiveIcon className={isActive ? "text-[#3b82f6]" : "text-[#6b7280]"} />}
+                  <span className={cn(
+                    "text-[14px] font-medium",
+                    isActive ? "text-white" : "text-[#6b7280]"
+                  )}>
+                    {cat.label}
+                  </span>
+                </button>
+              )
+            })}
+          </div>
+        </div>
+      </div>
+
+      {/* Game History Section */}
+      <div className="px-4 mb-6">
+        <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center gap-2">
+            <Clock className="w-5 h-5 text-white" strokeWidth={2} />
+            <h2 className="text-white text-[17px] font-semibold">История игр</h2>
+          </div>
+          <div className="flex items-center gap-1">
+            <button className="w-9 h-9 rounded-xl bg-[#1f2937] flex items-center justify-center">
               <ChevronLeft className="w-4 h-4 text-[#6b7280]" />
             </button>
-            <button className="w-8 h-8 rounded-lg bg-[#1f2937] flex items-center justify-center">
+            <button className="w-9 h-9 rounded-xl bg-[#1f2937] flex items-center justify-center">
               <ChevronRight className="w-4 h-4 text-white" />
             </button>
           </div>
         </div>
-      </div>
-
-      {/* Recent Games Section */}
-      <div className="px-4">
+        
         <div className="flex gap-2 overflow-x-auto scrollbar-hide pb-2">
           {recentGames.map((game) => (
             <button
               key={game.id}
-              className="flex-shrink-0"
+              className="flex-shrink-0 relative"
             >
-              <img
+              <Image
                 src={game.image}
                 alt=""
-                className="w-[100px] h-[140px] rounded-lg object-cover"
+                width={120}
+                height={160}
+                className="w-[120px] h-[160px] rounded-xl object-cover"
+                unoptimized
               />
+              <div className="absolute bottom-2 left-2 right-2 bg-black/60 rounded px-1.5 py-0.5">
+                <span className="text-[10px] text-white font-medium">{game.provider}</span>
+              </div>
             </button>
           ))}
         </div>
       </div>
 
-      {/* Ducky Wheel FAB */}
-      <div className="fixed bottom-20 left-1/2 -translate-x-1/2 z-40 flex flex-col items-center">
-        <img
-          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-Uxtm17bIlkUnjSRUjYdWlzBuirNdAQ.png"
-          alt="Ducky Wheel"
-          className="w-[100px] h-auto object-contain"
-        />
+      {/* Live Games Section */}
+      <div className="px-4 mb-6">
+        <div className="flex items-center justify-between mb-3">
+          <h2 className="text-white text-[17px] font-semibold">Live-игры</h2>
+          <div className="flex items-center gap-1">
+            <button className="px-4 py-2 rounded-xl bg-[#1f2937] text-white text-sm font-medium">
+              Все
+            </button>
+            <button className="w-9 h-9 rounded-xl bg-[#1f2937] flex items-center justify-center">
+              <ChevronLeft className="w-4 h-4 text-[#6b7280]" />
+            </button>
+            <button className="w-9 h-9 rounded-xl bg-[#1f2937] flex items-center justify-center">
+              <ChevronRight className="w-4 h-4 text-white" />
+            </button>
+          </div>
+        </div>
+        
+        <div className="flex gap-2 overflow-x-auto scrollbar-hide pb-2">
+          {liveGames.map((game) => (
+            <button
+              key={game.id}
+              className="flex-shrink-0"
+            >
+              <Image
+                src={game.image}
+                alt=""
+                width={140}
+                height={100}
+                className="w-[140px] h-[100px] rounded-xl object-cover"
+                unoptimized
+              />
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* Support FAB */}
@@ -158,5 +240,34 @@ export function HomeContent() {
         <Headphones className="w-6 h-6 text-white" />
       </button>
     </div>
+  )
+}
+
+function GridIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 20 20" fill="currentColor" className={cn("w-5 h-5", className)}>
+      <rect x="2" y="2" width="7" height="7" rx="1.5" />
+      <rect x="11" y="2" width="7" height="7" rx="1.5" />
+      <rect x="2" y="11" width="7" height="7" rx="1.5" />
+      <rect x="11" y="11" width="7" height="7" rx="1.5" />
+    </svg>
+  )
+}
+
+function SlotsIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 20 20" fill="currentColor" className={cn("w-5 h-5", className)}>
+      <path d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm3 4a1 1 0 11-2 0 1 1 0 012 0zm4 0a1 1 0 11-2 0 1 1 0 012 0zm4 0a1 1 0 11-2 0 1 1 0 012 0z"/>
+    </svg>
+  )
+}
+
+function LiveIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" className={cn("w-5 h-5", className)}>
+      <rect x="3" y="4" width="14" height="10" rx="2" />
+      <path d="M7 16h6" />
+      <circle cx="10" cy="9" r="2" fill="currentColor" />
+    </svg>
   )
 }

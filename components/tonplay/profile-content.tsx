@@ -10,15 +10,15 @@ interface ProfileContentProps {
 export function ProfileContent({ onBack }: ProfileContentProps) {
   return (
     <div className="pb-24 bg-[#0d0e1a]">
-      {/* Header */}
+      {/* Back Button Row */}
       <div className="flex items-center justify-between px-4 py-3">
         <button onClick={onBack} className="bg-[#1f2937] px-4 py-2 rounded-full flex items-center gap-2">
-          <ArrowLeft className="w-4 h-4 text-white" strokeWidth={2} />
+          <ChevronLeft />
           <span className="text-white text-sm">Назад</span>
         </button>
         <div className="flex items-center gap-2">
           <button className="w-9 h-9 rounded-full bg-[#1f2937] flex items-center justify-center">
-            <ChevronUp className="w-5 h-5 text-white" />
+            <ChevronDown className="w-5 h-5 text-white" />
           </button>
           <button className="w-9 h-9 rounded-full bg-[#1f2937] flex items-center justify-center">
             <MoreHorizontal className="w-5 h-5 text-white" />
@@ -27,34 +27,98 @@ export function ProfileContent({ onBack }: ProfileContentProps) {
       </div>
 
       {/* App Header Row */}
-      <div className="flex items-center justify-between px-4 py-2 mb-4">
-        <svg viewBox="0 0 80 24" className="h-6 w-20">
-          <text x="0" y="18" fill="white" fontFamily="serif" fontStyle="italic" fontSize="18">
-            <tspan fontWeight="bold">Ton</tspan>
-            <tspan fontWeight="normal">play</tspan>
-          </text>
-        </svg>
-        <div className="flex items-center gap-2">
-          <span className="text-white text-sm">USD</span>
-          <ChevronDown className="w-3.5 h-3.5 text-[#6b7280]" />
+      <div className="flex items-center justify-between px-4 py-2 mb-2">
+        <div className="flex items-center flex-shrink-0">
+          <svg viewBox="0 0 60 32" className="h-8 w-14">
+            <text x="0" y="14" fill="white" fontFamily="serif" fontStyle="italic" fontSize="14" fontWeight="bold">Ton</text>
+            <text x="0" y="28" fill="white" fontFamily="serif" fontStyle="italic" fontSize="14" fontWeight="normal">play</text>
+          </svg>
+        </div>
+        <div className="flex flex-col items-start ml-2">
+          <div className="flex items-center gap-0.5">
+            <span className="text-white text-sm font-medium">USD</span>
+            <ChevronDown className="w-3.5 h-3.5 text-[#6b7280]" />
+          </div>
           <span className="text-white text-sm">0,00$</span>
         </div>
-        <button className="bg-[#3b82f6]/30 text-[#3b82f6] px-5 py-2 rounded-full text-sm font-medium">
+        <button className="bg-[#3b82f6] text-white px-6 py-2.5 rounded-xl text-[15px] font-semibold ml-auto mr-3">
           Пополнить
         </button>
-        <div className="relative">
-          <div className="w-10 h-10 rounded-full overflow-hidden">
+        <div className="relative flex-shrink-0">
+          <div className="w-11 h-11 rounded-xl overflow-hidden">
             <Image 
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-Ynw3M6pkeJrzNzYc9NpJZTDDlKmGvq.png"
+              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-2WnR2w2wFXA1rxJlamwLMwXUxKH2UY.png"
               alt="Avatar"
-              width={40}
-              height={40}
+              width={44}
+              height={44}
               className="w-full h-full object-cover"
               unoptimized
             />
           </div>
-          <div className="absolute -top-0.5 -right-0.5 w-3 h-3 bg-[#ef4444] rounded-full border-2 border-[#0d0e1a]" />
+          <div className="absolute -top-0.5 -right-0.5 w-3.5 h-3.5 bg-[#ef4444] rounded-full border-2 border-[#0d0e1a]" />
         </div>
+      </div>
+
+      {/* Page Title */}
+      <div className="flex items-center gap-3 px-4 mb-5">
+        <button onClick={onBack} className="text-white">
+          <ArrowLeft className="w-5 h-5" strokeWidth={2} />
+        </button>
+        <h1 className="text-white text-xl font-bold">Личный профиль</h1>
+      </div>
+
+      {/* Copy ID Section */}
+      <div className="px-4 mb-6">
+        <div className="bg-[#1f2937] rounded-2xl p-4 flex items-center gap-3">
+          <div className="w-12 h-12 rounded-xl overflow-hidden">
+            <Image 
+              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-2WnR2w2wFXA1rxJlamwLMwXUxKH2UY.png"
+              alt="Avatar"
+              width={48}
+              height={48}
+              className="w-full h-full object-cover"
+              unoptimized
+            />
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="text-white text-[15px]">Копировать мой ID</span>
+            <Copy className="w-4 h-4 text-[#6b7280]" strokeWidth={1.5} />
+          </div>
+        </div>
+      </div>
+
+      {/* Personal Data Section */}
+      <div className="px-4 mb-5">
+        <h2 className="text-white text-[17px] font-semibold mb-4">Персональные данные</h2>
+        
+        <div className="space-y-3">
+          {/* Name Input */}
+          <div className="bg-[#1f2937] rounded-xl p-4">
+            <span className="text-[#6b7280] text-[15px]">Имя</span>
+          </div>
+          
+          {/* Surname Input */}
+          <div className="bg-[#1f2937] rounded-xl p-4">
+            <span className="text-[#6b7280] text-[15px]">Фамилия</span>
+          </div>
+          
+          {/* Birth Date */}
+          <div className="bg-[#1f2937] rounded-xl p-4 flex items-center justify-between">
+            <span className="text-[#6b7280] text-[15px]">Дата рождения</span>
+            <Calendar className="w-5 h-5 text-[#6b7280]" strokeWidth={1.5} />
+          </div>
+          
+          {/* Gender */}
+          <div className="bg-[#1f2937] rounded-xl p-4 flex items-center justify-between">
+            <span className="text-[#6b7280] text-[15px]">Пол</span>
+            <ChevronUp className="w-5 h-5 text-[#6b7280]" strokeWidth={1.5} />
+          </div>
+        </div>
+
+        {/* Save Button */}
+        <button className="w-full bg-[#3b82f6]/30 text-[#3b82f6] py-3.5 rounded-xl text-[15px] font-semibold mt-4">
+          Сохранить
+        </button>
       </div>
 
       {/* Contact Data */}
@@ -108,11 +172,9 @@ export function ProfileContent({ onBack }: ProfileContentProps) {
       {/* Footer */}
       <div className="px-4">
         <div className="flex items-center justify-between mb-6">
-          <svg viewBox="0 0 80 24" className="h-6 w-20">
-            <text x="0" y="18" fill="white" fontFamily="serif" fontStyle="italic" fontSize="18">
-              <tspan fontWeight="bold">Ton</tspan>
-              <tspan fontWeight="normal">play</tspan>
-            </text>
+          <svg viewBox="0 0 80 32" className="h-8 w-20">
+            <text x="0" y="14" fill="white" fontFamily="serif" fontStyle="italic" fontSize="14" fontWeight="bold">Ton</text>
+            <text x="0" y="28" fill="white" fontFamily="serif" fontStyle="italic" fontSize="14" fontWeight="normal">play</text>
           </svg>
           <button className="flex items-center gap-2 bg-[#1f2937] px-4 py-2.5 rounded-xl">
             <span className="text-base">🇷🇺</span>
@@ -156,6 +218,14 @@ export function ProfileContent({ onBack }: ProfileContentProps) {
         <Headphones className="w-6 h-6 text-white" strokeWidth={1.5} />
       </button>
     </div>
+  )
+}
+
+function ChevronLeft() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 text-white">
+      <path d="M15 18l-6-6 6-6" />
+    </svg>
   )
 }
 

@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { X, Plus, ArrowUpRight, ChevronDown, Headphones } from "lucide-react"
+import { X, Plus, ArrowUpRight, ChevronDown, ChevronUp } from "lucide-react"
 import { cn } from "@/lib/utils"
 import Image from "next/image"
 
@@ -12,43 +12,83 @@ interface WalletModalProps {
 
 const cryptoOptionsDeposit = [
   { 
-    id: "ton-bonus", 
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-edFePiHEWJ0nlJNbv0LzfsqteGTGKy.png"
+    id: "ton", 
+    name: "TON",
+    subname: "(Toncoin)",
+    bonus: "+7%",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-edFePiHEWJ0nlJNbv0LzfsqteGTGKy.png",
+    logo: "/ton-logo.png"
   },
   { 
-    id: "usdt-ton-bonus", 
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-ZzmwHaWt0AO754iRE63vJ5qfWb27OA.png"
+    id: "usdt-ton", 
+    name: "USDT",
+    subname: "(Toncoin)",
+    bonus: "+7%",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-ZzmwHaWt0AO754iRE63vJ5qfWb27OA.png",
   },
   { 
-    id: "usdt-trc20-bonus", 
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-XVVVTpnaro6BRNdpTtEf65rss7pPyW.png"
+    id: "usdt-trc20", 
+    name: "USDT",
+    subname: "(TRC20)",
+    bonus: "+5%",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-XVVVTpnaro6BRNdpTtEf65rss7pPyW.png",
   },
   { 
-    id: "usdt-bep20-bonus", 
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-Oe2JcqsbJVCaoBeOJH0PSY0KYQsMuc.png"
+    id: "usdt-bep20", 
+    name: "USDT (BEP20)",
+    bonus: "+5%",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-Oe2JcqsbJVCaoBeOJH0PSY0KYQsMuc.png",
   },
   { 
     id: "trx", 
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-502jvfKhvS7K8nVb0Q4McOGL580sPW.png"
+    name: "TRX (Tron)",
+    bonus: "+5%",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-502jvfKhvS7K8nVb0Q4McOGL580sPW.png",
+  },
+  { 
+    id: "eth", 
+    name: "ETH",
+    subname: "(Ethereum)",
+    bonus: "+5%",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-502jvfKhvS7K8nVb0Q4McOGL580sPW.png",
   },
 ]
 
 const cryptoOptionsWithdraw = [
   { 
     id: "ton", 
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-canX0ACZ6jloAFdei59DBPMqed8E5e.png"
+    name: "TON",
+    subname: "(Toncoin)",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-canX0ACZ6jloAFdei59DBPMqed8E5e.png",
   },
   { 
     id: "usdt-ton", 
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-AgGJqTLaFatIO1hB3vfYXnZwjZRVcX.png"
+    name: "USDT",
+    subname: "(Toncoin)",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-AgGJqTLaFatIO1hB3vfYXnZwjZRVcX.png",
   },
   { 
     id: "usdt-trc20", 
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-t0lpV9TIRNHT5ie5ii0lUfuWddVWan.png"
+    name: "USDT",
+    subname: "(TRC20)",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-t0lpV9TIRNHT5ie5ii0lUfuWddVWan.png",
   },
   { 
     id: "trx", 
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-502jvfKhvS7K8nVb0Q4McOGL580sPW.png"
+    name: "TRX (Tron)",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-502jvfKhvS7K8nVb0Q4McOGL580sPW.png",
+  },
+  { 
+    id: "eth", 
+    name: "ETH",
+    subname: "(Ethereum)",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-502jvfKhvS7K8nVb0Q4McOGL580sPW.png",
+  },
+  { 
+    id: "usdt-erc20", 
+    name: "USDT",
+    subname: "(ERC20)",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-502jvfKhvS7K8nVb0Q4McOGL580sPW.png",
   },
 ]
 
@@ -94,8 +134,8 @@ export function WalletModal({ isOpen, onClose }: WalletModalProps) {
         {/* Header */}
         <div className="flex items-center justify-between px-5 pt-6 pb-4">
           <h2 className="text-[22px] font-bold text-white">Кошелек</h2>
-          <button onClick={onClose} className="text-white/80 hover:text-white transition-colors">
-            <X className="w-6 h-6" strokeWidth={1.5} />
+          <button onClick={onClose} className="w-10 h-10 rounded-full border border-[#374151] flex items-center justify-center text-white/80 hover:text-white transition-colors">
+            <X className="w-5 h-5" strokeWidth={1.5} />
           </button>
         </div>
 
@@ -132,7 +172,7 @@ function DepositContent() {
   return (
     <div className="space-y-5">
       {/* Promo Banner */}
-      <div className="relative rounded-xl overflow-hidden">
+      <div className="relative rounded-2xl overflow-hidden">
         <Image
           src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-tibbFfkx4z4Lws3tsGvxYYbiGIlDic.png"
           alt="До +7% на первое крипто-пополнение"
@@ -143,16 +183,18 @@ function DepositContent() {
         />
       </div>
 
-      {/* Balance */}
+      {/* Region selector */}
       <div className="flex items-center justify-between">
-        <div>
-          <p className="text-[#6b7280] text-sm">Ваш баланс</p>
-          <p className="text-white text-xl font-bold">0,00$</p>
+        <div className="flex items-center gap-2">
+          <span className="text-[#6b7280] text-[15px]">Регион оплаты</span>
+          <div className="w-5 h-5 rounded-full bg-[#374151] flex items-center justify-center">
+            <span className="text-[#6b7280] text-xs">?</span>
+          </div>
         </div>
         <button className="flex items-center gap-2 bg-[#1f2937] px-4 py-2.5 rounded-xl">
           <span className="text-base">🇺🇸</span>
           <span className="text-white text-[15px]">USD</span>
-          <ChevronDown className="w-4 h-4 text-[#6b7280]" />
+          <ChevronUp className="w-4 h-4 text-[#6b7280]" />
         </button>
       </div>
 
@@ -161,15 +203,20 @@ function DepositContent() {
         <h3 className="text-white text-[17px] font-semibold mb-4">Криптовалюта</h3>
         <div className="grid grid-cols-2 gap-3">
           {cryptoOptionsDeposit.map((crypto) => (
-            <button key={crypto.id} className="block">
-              <Image
-                src={crypto.image}
-                alt=""
-                width={170}
-                height={100}
-                className="w-full rounded-xl object-cover"
-                unoptimized
-              />
+            <button key={crypto.id} className="bg-[#1f2937] rounded-2xl p-4 flex flex-col relative overflow-hidden">
+              <div className="flex flex-col items-start">
+                <span className="text-white text-[15px] font-medium">{crypto.name}</span>
+                {crypto.subname && <span className="text-[#6b7280] text-[13px]">{crypto.subname}</span>}
+              </div>
+              {crypto.bonus && (
+                <div className="flex items-center gap-1 mt-2 bg-[#374151] rounded-lg px-2 py-1 w-fit">
+                  <GiftBoxIcon />
+                  <span className="text-white text-xs font-medium">{crypto.bonus}</span>
+                </div>
+              )}
+              <div className="absolute right-2 bottom-2 w-16 h-16 opacity-90">
+                <CryptoIcon type={crypto.id} />
+              </div>
             </button>
           ))}
         </div>
@@ -182,7 +229,7 @@ function WithdrawContent() {
   return (
     <div className="space-y-5">
       {/* Promo Banner */}
-      <div className="relative rounded-xl overflow-hidden">
+      <div className="relative rounded-2xl overflow-hidden">
         <Image
           src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-tibbFfkx4z4Lws3tsGvxYYbiGIlDic.png"
           alt="До +7% на первое крипто-пополнение"
@@ -202,7 +249,7 @@ function WithdrawContent() {
         <button className="flex items-center gap-2 bg-[#1f2937] px-4 py-2.5 rounded-xl">
           <span className="text-base">🇺🇸</span>
           <span className="text-white text-[15px]">USD</span>
-          <ChevronDown className="w-4 h-4 text-[#6b7280]" />
+          <ChevronUp className="w-4 h-4 text-[#6b7280]" />
         </button>
       </div>
 
@@ -211,15 +258,14 @@ function WithdrawContent() {
         <h3 className="text-white text-[17px] font-semibold mb-4">Криптовалюта</h3>
         <div className="grid grid-cols-2 gap-3">
           {cryptoOptionsWithdraw.map((crypto) => (
-            <button key={crypto.id} className="block">
-              <Image
-                src={crypto.image}
-                alt=""
-                width={170}
-                height={100}
-                className="w-full rounded-xl object-cover"
-                unoptimized
-              />
+            <button key={crypto.id} className="bg-[#1f2937] rounded-2xl p-4 flex flex-col relative overflow-hidden min-h-[100px]">
+              <div className="flex flex-col items-start">
+                <span className="text-white text-[15px] font-medium">{crypto.name}</span>
+                {crypto.subname && <span className="text-[#6b7280] text-[13px]">{crypto.subname}</span>}
+              </div>
+              <div className="absolute right-2 bottom-2 w-16 h-16 opacity-90">
+                <CryptoIcon type={crypto.id} />
+              </div>
             </button>
           ))}
         </div>
@@ -232,7 +278,7 @@ function HistoryContent({ groupedTransactions }: { groupedTransactions: Record<s
   return (
     <div className="space-y-5">
       {/* Support Card */}
-      <div className="bg-[#1f2937] rounded-xl p-4 flex items-start gap-3">
+      <div className="bg-[#1f2937] rounded-2xl p-4 flex items-start gap-3">
         <div className="flex-1">
           <div className="flex items-center gap-2 mb-1">
             <span className="text-white font-semibold text-[15px]">Поддержка</span>
@@ -246,16 +292,21 @@ function HistoryContent({ groupedTransactions }: { groupedTransactions: Record<s
           </button>
         </div>
         <div className="w-[72px] h-[72px] flex-shrink-0">
-          <div className="w-full h-full rounded-full bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center">
-            <Headphones className="w-8 h-8 text-white" />
-          </div>
+          <Image
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-2WnR2w2wFXA1rxJlamwLMwXUxKH2UY.png"
+            alt="Support Duck"
+            width={72}
+            height={72}
+            className="w-full h-full object-contain"
+            unoptimized
+          />
         </div>
       </div>
 
       {/* Transactions */}
       {Object.entries(groupedTransactions).map(([date, txs]) => (
         <div key={date}>
-          <h3 className="text-white font-bold text-[15px] mb-2">{date}</h3>
+          <h3 className="text-white font-bold text-[15px] mb-3">{date}</h3>
           <div className="space-y-0">
             {txs.map((tx) => (
               <TransactionItem key={tx.id} transaction={tx} />
@@ -286,7 +337,7 @@ function TransactionItem({ transaction }: TransactionItemProps) {
 
   return (
     <div className="flex items-center py-3">
-      <div className="w-10 h-10 rounded-full bg-[#0d0e1a] flex items-center justify-center mr-3">
+      <div className="w-10 h-10 rounded-full bg-[#0d0e1a] border border-[#374151] flex items-center justify-center mr-3">
         {transaction.type === "deposit" ? (
           <Plus className="w-5 h-5 text-white" strokeWidth={1.5} />
         ) : (
@@ -307,4 +358,112 @@ function TransactionItem({ transaction }: TransactionItemProps) {
       </div>
     </div>
   )
+}
+
+function GiftBoxIcon() {
+  return (
+    <svg viewBox="0 0 16 16" fill="currentColor" className="w-4 h-4 text-[#f59e0b]">
+      <path d="M3 4.5A1.5 1.5 0 014.5 3h7A1.5 1.5 0 0113 4.5V6H3V4.5zM3 7v5.5A1.5 1.5 0 004.5 14h7a1.5 1.5 0 001.5-1.5V7H3z" />
+    </svg>
+  )
+}
+
+function CryptoIcon({ type }: { type: string }) {
+  // TON icon
+  if (type === "ton") {
+    return (
+      <div className="w-full h-full rounded-full bg-[#0098ea] flex items-center justify-center">
+        <svg viewBox="0 0 40 40" className="w-10 h-10">
+          <path d="M20 8L32 20L20 32L8 20L20 8Z" fill="white" />
+        </svg>
+      </div>
+    )
+  }
+  
+  // USDT Toncoin
+  if (type === "usdt-ton") {
+    return (
+      <div className="relative w-full h-full">
+        <div className="w-full h-full rounded-full bg-[#26a17b] flex items-center justify-center">
+          <span className="text-white text-2xl font-bold">₮</span>
+        </div>
+        <div className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-[#0098ea] border-2 border-[#1f2937] flex items-center justify-center">
+          <svg viewBox="0 0 20 20" className="w-3 h-3">
+            <path d="M10 4L16 10L10 16L4 10L10 4Z" fill="white" />
+          </svg>
+        </div>
+      </div>
+    )
+  }
+  
+  // USDT TRC20
+  if (type === "usdt-trc20") {
+    return (
+      <div className="relative w-full h-full">
+        <div className="w-full h-full rounded-full bg-[#26a17b] flex items-center justify-center">
+          <span className="text-white text-2xl font-bold">₮</span>
+        </div>
+        <div className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-[#eb0029] border-2 border-[#1f2937] flex items-center justify-center">
+          <span className="text-white text-xs font-bold">T</span>
+        </div>
+      </div>
+    )
+  }
+  
+  // USDT BEP20
+  if (type === "usdt-bep20") {
+    return (
+      <div className="relative w-full h-full">
+        <div className="w-full h-full rounded-full bg-[#26a17b] flex items-center justify-center">
+          <span className="text-white text-2xl font-bold">₮</span>
+        </div>
+        <div className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-[#f0b90b] border-2 border-[#1f2937] flex items-center justify-center">
+          <span className="text-[#1e2026] text-xs font-bold">B</span>
+        </div>
+      </div>
+    )
+  }
+  
+  // TRX
+  if (type === "trx") {
+    return (
+      <div className="w-full h-full rounded-full bg-[#eb0029] flex items-center justify-center">
+        <svg viewBox="0 0 40 40" className="w-10 h-10">
+          <path d="M20 8L32 20L20 32L20 20L8 20L20 8Z" fill="white" />
+        </svg>
+      </div>
+    )
+  }
+  
+  // ETH
+  if (type === "eth") {
+    return (
+      <div className="w-full h-full rounded-full bg-[#627eea] flex items-center justify-center">
+        <svg viewBox="0 0 40 40" className="w-8 h-8">
+          <path d="M20 6L20 16L28 20L20 6Z" fill="white" fillOpacity="0.6" />
+          <path d="M20 6L12 20L20 16L20 6Z" fill="white" />
+          <path d="M20 26L20 34L28 22L20 26Z" fill="white" fillOpacity="0.6" />
+          <path d="M20 34L20 26L12 22L20 34Z" fill="white" />
+          <path d="M20 24L28 20L20 16L20 24Z" fill="white" fillOpacity="0.2" />
+          <path d="M12 20L20 24L20 16L12 20Z" fill="white" fillOpacity="0.6" />
+        </svg>
+      </div>
+    )
+  }
+  
+  // USDT ERC20
+  if (type === "usdt-erc20") {
+    return (
+      <div className="relative w-full h-full">
+        <div className="w-full h-full rounded-full bg-[#26a17b] flex items-center justify-center">
+          <span className="text-white text-2xl font-bold">₮</span>
+        </div>
+        <div className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-[#627eea] border-2 border-[#1f2937] flex items-center justify-center">
+          <span className="text-white text-xs font-bold">E</span>
+        </div>
+      </div>
+    )
+  }
+  
+  return null
 }

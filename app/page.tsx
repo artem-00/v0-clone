@@ -23,9 +23,19 @@ export default function TonPlayApp() {
     }
   }
 
+  const handleOpenProfile = () => {
+    setShowProfile(true)
+    setActiveTab("menu")
+  }
+
   return (
     <div className="min-h-screen bg-[#0d0e1a] max-w-md mx-auto relative">
-      <AppHeader onOpenWallet={() => setIsWalletOpen(true)} />
+      {!showProfile && (
+        <AppHeader 
+          onOpenWallet={() => setIsWalletOpen(true)} 
+          onOpenProfile={handleOpenProfile}
+        />
+      )}
       
       <main>
         {showProfile ? (
