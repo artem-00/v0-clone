@@ -1,6 +1,6 @@
 "use client"
 
-import { ArrowLeft, Copy, Calendar, ChevronDown, Lock, Check, Phone, Headphones, ArrowUp, MoreHorizontal, ChevronUp } from "lucide-react"
+import { ArrowLeft, Copy, Calendar, ChevronDown, Lock, Check, Phone, Headphones, ArrowUp, ChevronUp } from "lucide-react"
 import Image from "next/image"
 
 interface ProfileContentProps {
@@ -20,21 +20,7 @@ export function ProfileContent({ onBack }: ProfileContentProps) {
         unoptimized
       />
 
-      {/* Back Button Row */}
-      <div className="flex items-center justify-between px-4 py-3">
-        <button onClick={onBack} className="bg-[#1f2937] px-4 py-2 rounded-full flex items-center gap-2">
-          <ChevronLeftIcon />
-          <span className="text-white text-sm">Назад</span>
-        </button>
-        <div className="flex items-center gap-2">
-          <button className="w-9 h-9 rounded-full bg-[#1f2937] flex items-center justify-center">
-            <ChevronDown className="w-5 h-5 text-white" />
-          </button>
-          <button className="w-9 h-9 rounded-full bg-[#1f2937] flex items-center justify-center">
-            <MoreHorizontal className="w-5 h-5 text-white" />
-          </button>
-        </div>
-      </div>
+
 
       {/* App Header Row - with cleaner logo and avatar without online indicator */}
       <div className="flex items-center justify-between px-4 py-2 mb-2">
@@ -237,14 +223,6 @@ export function ProfileContent({ onBack }: ProfileContentProps) {
         <Headphones className="w-6 h-6 text-white" strokeWidth={1.5} />
       </button>
     </div>
-  )
-}
-
-function ChevronLeftIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 text-white">
-      <path d="M15 18l-6-6 6-6" />
-    </svg>
   )
 }
 
