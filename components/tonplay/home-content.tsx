@@ -100,23 +100,17 @@ export function HomeContent() {
         </div>
       </div>
 
-      {/* Main Promo Banner - removed one scroll indicator */}
+      {/* Main Promo Banner */}
       <div className="px-4 mb-4">
         <div className="relative rounded-2xl overflow-hidden">
           <Image
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-yVfEnCdP6NBoobex0LhMwKG1o1MhMm.png"
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-LesXovGic9DVHwxMbn4O2bEOqyE3CA.png"
             alt="375% +200FS FOR NEW PLAYERS"
             width={400}
-            height={200}
+            height={180}
             className="w-full h-auto object-cover"
             unoptimized
           />
-          {/* Single carousel dots indicator */}
-          <div className="absolute bottom-3 left-4 flex gap-1.5">
-            <div className="w-6 h-1.5 bg-white rounded-full" />
-            <div className="w-1.5 h-1.5 bg-white/40 rounded-full" />
-            <div className="w-1.5 h-1.5 bg-white/40 rounded-full" />
-          </div>
         </div>
       </div>
 
