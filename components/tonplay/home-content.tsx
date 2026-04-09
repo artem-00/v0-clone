@@ -36,33 +36,29 @@ const gameCategories = [
 ]
 
 const recentGames = [
-  { 
-    id: 1, 
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-zU3IxIW8yBvRZGrfEwmvILEwMViai4.png",
-  },
-  { 
-    id: 2, 
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-ApvLUS5bC7AFw7tyO7LPAaROm3zDsX.png",
-  },
-  { 
-    id: 3, 
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-ZGzocdNuCda173j0LkTcVpdNNUMMVn.png",
-  },
+  { id: 1, image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-NmNRCHpEflny7frRbNz7RvkNc5JLC8.png" },
+  { id: 2, image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-Fhvr6vRmKbO20WeRjBfbQAygiY4vmx.png" },
+  { id: 3, image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-wDMfxFvmna86zvPq7XOkfN3YmlfBHl.png" },
+  { id: 4, image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-KZ00MkTacOWcNeI6dshmQhY1Ftu2hw.png" },
+  { id: 5, image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-es3qIAe5WHs8sqRMrNgwv8Vs5nytkf.png" },
+  { id: 6, image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-4t09Cbb3BtNKpT1Jl0xBw6RmShwi2z.png" },
+]
+
+const popularGames = [
+  { id: 1, image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-1AqUFPqlTq431zKMGMN6jw1O5d81t4.png" },
+  { id: 2, image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-GD8Tpr6e9ZdiyFDJXuUYZSBux8POrC.png" },
+  { id: 3, image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-qWH7IK9Xumjbfc7shA1pvvKCfCmXvV.png" },
+  { id: 4, image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-HWH03GF3qVhbKCmM27YL4LKI8GExig.png" },
+  { id: 5, image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-4PAgHK2Z0ZQFXl32DVUiCEkmLyGoNx.png" },
+  { id: 6, image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-LzjNdfDw2oKZ8zLcaFVDjYuhOnQFWZ.png" },
 ]
 
 const liveGames = [
-  { 
-    id: 1, 
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-zU3IxIW8yBvRZGrfEwmvILEwMViai4.png",
-  },
-  { 
-    id: 2, 
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-ApvLUS5bC7AFw7tyO7LPAaROm3zDsX.png",
-  },
-  { 
-    id: 3, 
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-ZGzocdNuCda173j0LkTcVpdNNUMMVn.png",
-  },
+  { id: 1, image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-Gsl0ikx5oAXofqzYdzG5YgblZXmeuH.png" },
+  { id: 2, image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-bJ2qSSeIrKZx5QTvgsTVuvaqVGXHUl.png" },
+  { id: 3, image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-NmNRCHpEflny7frRbNz7RvkNc5JLC8.png" },
+  { id: 4, image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-Fhvr6vRmKbO20WeRjBfbQAygiY4vmx.png" },
+  { id: 5, image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-wDMfxFvmna86zvPq7XOkfN3YmlfBHl.png" },
 ]
 
 export function HomeContent() {
@@ -151,7 +147,7 @@ export function HomeContent() {
         </div>
       </div>
 
-      {/* Game History Section - removed provider labels */}
+      {/* Game History Section */}
       <div className="px-4 mb-6">
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-2">
@@ -170,6 +166,42 @@ export function HomeContent() {
         
         <div className="flex gap-2 overflow-x-auto scrollbar-hide pb-2">
           {recentGames.map((game) => (
+            <button
+              key={game.id}
+              className="flex-shrink-0"
+            >
+              <Image
+                src={game.image}
+                alt=""
+                width={120}
+                height={160}
+                className="w-[120px] h-[160px] rounded-xl object-cover"
+                unoptimized
+              />
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Popular Games Section */}
+      <div className="px-4 mb-6">
+        <div className="flex items-center justify-between mb-3">
+          <h2 className="text-white text-[17px] font-semibold">Популярные</h2>
+          <div className="flex items-center gap-1">
+            <button className="px-4 py-2 rounded-xl bg-[#1f2937] text-white text-sm font-medium">
+              Все
+            </button>
+            <button className="w-9 h-9 rounded-xl bg-[#1f2937] flex items-center justify-center">
+              <ChevronLeft className="w-4 h-4 text-[#6b7280]" />
+            </button>
+            <button className="w-9 h-9 rounded-xl bg-[#1f2937] flex items-center justify-center">
+              <ChevronRight className="w-4 h-4 text-white" />
+            </button>
+          </div>
+        </div>
+        
+        <div className="flex gap-2 overflow-x-auto scrollbar-hide pb-2">
+          {popularGames.map((game) => (
             <button
               key={game.id}
               className="flex-shrink-0"
@@ -213,9 +245,9 @@ export function HomeContent() {
               <Image
                 src={game.image}
                 alt=""
-                width={140}
-                height={100}
-                className="w-[140px] h-[100px] rounded-xl object-cover"
+                width={120}
+                height={160}
+                className="w-[120px] h-[160px] rounded-xl object-cover"
                 unoptimized
               />
             </button>
